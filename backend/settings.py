@@ -149,6 +149,7 @@ GRAPHQL_JWT = {
         "graphql_auth.mutations.VerifyAccount",
         "graphql_auth.mutations.ObtainJSONWebToken",
         "graphql_auth.mutations.VerifyToken",
+        "graphql_auth.mutations.RevokeToken",
 
     ],
     "JWT_VERIFY_EXPIRATION": False,
@@ -162,9 +163,12 @@ AUTH_USER_MODEL = 'authors.Author'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://sub.example.com",
-    "http://localhost:8080",
-    "http://127.0.0.1:9000"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3001/",
+#     "https://sub.example.com",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:9000"
+# ]
+
+CORS_ORIGIN_ALLOW_ALL = True
