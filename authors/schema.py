@@ -79,7 +79,7 @@ class LikeMutation(graphene.Mutation):
     class Arguments:
         bookid = graphene.ID()
         like = graphene.Boolean(required=True)
-        pass
+
 
     book = graphene.Field(BookType)
 
@@ -102,16 +102,22 @@ class AuthorMutation(graphene.Mutation):
         authorid = graphene.ID()
         username = graphene.String()
         email = graphene.String()
-        pass
+        delete = graphene.Boolean()
+
 
     author = graphene.Field(AuthorType)
 
     @classmethod
-    def mutate(cls, root, info, authorid, username, email):
+    def mutate(cls, root, info, authorid, username, email, delete):
         author = Author.objects.get(id=authorid)
-        author.username = username
-        author.email = email
-        author.save()
+
+        if delete:
+            # print("deleteeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+            author.delete()
+        else:
+            author.username = username
+            author.email = email
+            author.save()
 
         return AuthorMutation(author=author)
 
